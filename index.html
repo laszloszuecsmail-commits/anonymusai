@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anonymus AI - titkos tábori politikai kompessz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="masthead">
+        <div class="logo">
+          <div class="logo-mark">A</div>
+          <div>
+            <h1>Anonymus AI</h1>
+            <p>Baráti, titkos politikai kompessz játék</p>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section id="intro" class="panel active">
+          <div class="panel-content">
+            <p class="eyebrow">Anonymus mesél</p>
+            <h2>Üdvözöllek a titkos kérdéssorban</h2>
+
+            <figure class="intro-video">
+              <video id="introVideo" controls autoplay playsinline preload="auto">
+                <source src="Avatar_Video_start.mp4" type="video/mp4" />
+                A böngésződ nem tudja lejátszani ezt a videót.
+              </video>
+            </figure>
+
+            <p>
+              Ez nem vizsga, nem ítélet, és nem választási kalauz. A cél egy
+              játékos, intelligens csoportbeszélgetés: a horvátországi táborban 
+              közösen fedezzük fel, hogy ki hogyan gondolkodik a szabadságról, 
+              felelősségről és a közösségi szerepről.
+            </p>
+            <p class="note">
+              A végső eredmény természetesen titokban marad. A kimenetelt nem 
+              láthatod, csak egy megerősítést kapsz.
+            </p>
+            <div class="actions">
+              <button id="introContinue" data-step="intro" class="button" disabled>Kezdjük el</button>
+            </div>
+            <p class="video-gate-hint" id="introGateHint" hidden>
+              Indítsd el a bevezető videót a folytatáshoz.
+            </p>
+          </div>
+        </section>
+
+        <section id="avatar" class="panel">
+          <div class="panel-content">
+            <p class="eyebrow">Anonymus bemutatkozik</p>
+            <h2>Én vagyok Anonymus, a titokzatos krónikás</h2>
+            <p>
+              Világunk egyetlen baráti közösségéhez szólok: ez a játék a saját 
+              értékeinkről és preferenciáinkról szól. Nincsenek rossz válaszok,
+              csak személyes gondolatok.
+            </p>
+            <p>
+              Átvezetlek a kérdéseken. Te döntöd el, hol helyezkedsz el a 
+              gazdasági és a felelősség dimenzióiban. A megfejtést majd a 
+              sátorban találjuk ki együtt.
+            </p>
+            <div class="actions">
+              <button type="button" data-back="intro" class="button button-ghost">Vissza</button>
+              <button data-step="avatar" class="button">Folytatom</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="consent" class="panel">
+          <div class="panel-content">
+            <p class="eyebrow">Név és hozzájárulás</p>
+            <h2>Először írj be egy becenevet</h2>
+            <p>
+              A válaszaidhoz egy játékos megjelenítést társítunk. Nincs szükség 
+              igazi névre, bármilyen baráti jelző megfelel.
+            </p>
+            <label>
+              Megjelenítendő név
+              <input id="displayName" type="text" placeholder="Pl. Dénes, Kitti" maxlength="30" />
+            </label>
+            <div class="actions">
+              <button type="button" data-back="avatar" class="button button-ghost">Vissza</button>
+              <button data-step="consent" class="button">Folytatom a kérdéseket</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="questions" class="panel">
+          <div class="panel-content">
+            <p class="eyebrow">30 kérdés</p>
+            <h2>Skálázd a véleményed</h2>
+            <p>
+              A 0 és 100 közötti csúszkákkal jelöld, hogy mennyire értesz 
+              egyet egy-egy állítással. A közép nem semleges, hanem egy 
+              kiegyensúlyozott álláspont.
+            </p>
+            <form id="scaledForm" class="question-list"></form>
+            <div class="actions">
+              <button type="button" data-back="consent" class="button button-ghost">Vissza</button>
+              <button data-step="questions" class="button">Tovább az élethelyzetekhez</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="scenarios" class="panel">
+          <div class="panel-content">
+            <p class="eyebrow">Második próba</p>
+            <h2>Élethelyzetek</h2>
+            <p>
+              Az első részben általános állításokra válaszoltál. Most konkrét
+              élethelyzetek következnek.
+            </p>
+            <p>
+              Itt már nem elméletben kell dönteni, hanem olyan helyzetekben, ahol
+              valakinek az érdeke sérül, miközben mások számára társadalmi haszon
+              keletkezik. Minden kérdésnél egy 0-tól 100-ig tartó skálán válaszolj.
+            </p>
+            <p class="note">
+              0 azt jelenti: egyáltalán nem értek egyet a döntéssel.<br />
+              100 azt jelenti: teljesen egyetértek a döntéssel.
+            </p>
+
+            <form id="scenarioForm" class="question-list"></form>
+            <div class="actions">
+              <button type="button" data-back="questions" class="button button-ghost">Vissza</button>
+              <button data-step="scenarios" class="button">Tovább az ellenőrzéshez</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="submit" class="panel">
+          <div class="panel-content">
+            <p class="eyebrow">Ellenőrzés</p>
+            <h2>Utolsó lépés</h2>
+            <p>
+              Minden megadott válasz biztonságban marad, és csak a titkos 
+              admin listán lesz látható. Az értékelést nem kapod meg most.
+            </p>
+            <div class="summary-card">
+              <p><strong>Bejelentkezési név:</strong> <span id="summaryName">–</span></p>
+            </div>
+            <div class="actions">
+              <button type="button" data-back="scenarios" class="button button-ghost">Vissza</button>
+              <button id="submitButton" class="button button-primary">Véglegesítés</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="confirmation" class="panel">
+          <div class="panel-content">
+            <p class="eyebrow">Titkos megerősítés</p>
+            <h2>Köszönöm a részvételt!</h2>
+
+            <figure class="intro-video">
+              <video id="outroVideo" controls autoplay playsinline preload="metadata">
+                <source src="Avatar_Video_final.mp4" type="video/mp4" />
+                A böngésződ nem tudja lejátszani ezt a videót.
+              </video>
+            </figure>
+
+            <p>
+              A válaszaid rögzítve lettek. Az eredményt nem látod meg most,
+              mert ez a játék a baráti beszélgetésről szól, amelyet majd a
+              táborban folytatunk.
+            </p>
+            <p class="note">
+              A következő találkozáskor együtt fedezzük fel, mit árulhattak el 
+              ezek a válaszok a csapatunkról.
+            </p>
+            <div class="actions">
+              <button data-step="restart" class="button button-secondary">Vissza az elejére</button>
+              <button id="adminEntry" type="button" class="button button-gold">Admin – eredmények</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="results" class="panel results-panel">
+          <div class="panel-content">
+            <p class="eyebrow">Zárt krónika</p>
+            <h2>Eredmények</h2>
+
+            <div id="resultsGate" class="results-gate">
+              <p>
+                Ez a lap csak a krónikás kulcsával nyílik. Add meg a hozzáférési
+                kódot az eredmények megtekintéséhez.
+              </p>
+              <label>
+                Hozzáférési kód
+                <input id="resultsCode" type="password" placeholder="••••••••" autocomplete="off" />
+              </label>
+              <p id="resultsError" class="results-error" role="alert"></p>
+              <div class="actions">
+                <button type="button" data-back="intro" class="button button-ghost">Vissza</button>
+                <button id="unlockResults" type="button" class="button button-primary">Feloldás</button>
+              </div>
+            </div>
+
+            <div id="resultsContent" hidden>
+              <p class="results-lead">
+                Minden résztvevő egy pont a kompaszon. Lent a részletes válaszok.
+              </p>
+              <div id="resultsChart" class="results-chart"></div>
+              <div id="resultsList" class="results-list"></div>
+              <div class="actions">
+                <button data-step="restart" class="button button-secondary">Vissza az elejére</button>
+                <button id="clearResults" type="button" class="button button-danger">Összes eredmény törlése</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Anonymus AI — titkos baráti kérdőív</p>
+        <button id="openResults" type="button" class="footer-link">Zárt krónika</button>
+      </footer>
+    </div>
+  </body>
+</html>
