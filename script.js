@@ -515,8 +515,9 @@ function saveResult() {
 }
 
 async function submitResultToBackend(submission) {
-  // TODO: Paste the Google Apps Script / form backend endpoint URL here.
-  const endpoint = "PASTE_ENDPOINT_HERE";
+  // Google Apps Script web app endpoint (POST -> appends a row to the Sheet).
+  const endpoint =
+    "https://script.google.com/macros/s/AKfycbxxMkPvHcEfBAlemfW7LB0gj1khp50k6fenWj-DMnndtud4fCdo4tKbtBfuTLUSHXpH3Q/exec";
 
   try {
     const response = await fetch(endpoint, {
