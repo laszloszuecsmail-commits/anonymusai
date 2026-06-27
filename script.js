@@ -511,6 +511,28 @@ function saveResult() {
   const existing = JSON.parse(localStorage.getItem("anonymusResults") || "[]");
   existing.push(record);
   localStorage.setItem("anonymusResults", JSON.stringify(existing));
+  return record;
+}
+
+async function submitResultToBackend(submission) {
+  // TODO: Paste the Google Apps Script / form backend endpoint URL here.
+  const endpoint = "PASTE_ENDPOINT_HERE";
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(submission)
+    });
+
+    return true;
+  } catch (error) {
+    console.error("Backend submission failed", error);
+    return false;
+  }
 }
 
 function escapeHtml(value) {
@@ -652,8 +674,13 @@ function init() {
   }
 
   displayNameInput.addEventListener("input", syncSummary);
-  submitButton.addEventListener("click", () => {
-    saveResult();
+  submitButton.addEventListener("click", async () => {
+    // 1. Local backup, kept as before.
+    const record = saveResult();
+    // 2. Send the same result to the central backend (fire-and-forget;
+    //    localStorage still holds a copy if this fails).
+    submitResultToBackend(record);
+    // 3. Show the same hidden-result confirmation screen.
     showStep("confirmation");
   });
 
