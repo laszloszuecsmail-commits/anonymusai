@@ -1,4 +1,4 @@
-const steps = ["intro", "avatar", "consent", "questions", "scenarios", "submit", "confirmation"];
+const steps = ["intro", "consent", "questions", "scenarios", "submit", "confirmation"];
 const scaledQuestions = [
   {
     id: 1,
@@ -264,8 +264,9 @@ const scenarioForm = document.getElementById("scenarioForm");
 const submitButton = document.getElementById("submitButton");
 const introVideo = document.getElementById("introVideo");
 const outroVideo = document.getElementById("outroVideo");
-const introContinue = document.getElementById("introContinue");
-const introGateHint = document.getElementById("introGateHint");
+const introStart = document.getElementById("introStart");
+const introStartButton = document.getElementById("introStartButton");
+const introBody = document.getElementById("introBody");
 
 const RESULTS_CODE = "Leababa2023!";
 const openResultsButton = document.getElementById("openResults");
@@ -342,15 +343,35 @@ function stopAllVideos() {
   });
 }
 
-function lockIntroContinue() {
-  if (!introContinue) return;
-  introContinue.disabled = true;
-  if (introGateHint) introGateHint.hidden = false;
+function resetIntroGate() {
+  // Show the start screen again and keep the video silent until the user
+  // explicitly opts in (browsers block autoplay with sound).
+  if (introStart) introStart.hidden = false;
+  if (introBody) introBody.hidden = true;
+  if (introVideo) {
+    introVideo.pause();
+    try {
+      introVideo.currentTime = 0;
+    } catch (err) {
+      /* currentTime may not be settable until metadata loads; ignore */
+    }
+    introVideo.muted = true;
+  }
 }
 
-function unlockIntroContinue() {
-  if (introContinue) introContinue.disabled = false;
-  if (introGateHint) introGateHint.hidden = true;
+function startIntro() {
+  // Triggered by a user click, so we are allowed to play with sound.
+  if (introStart) introStart.hidden = true;
+  if (introBody) introBody.hidden = false;
+  if (!introVideo) return;
+  introVideo.muted = false;
+  introVideo.volume = 1;
+  const attempt = introVideo.play();
+  if (attempt && typeof attempt.catch === "function") {
+    attempt.catch(() => {
+      /* play may still be rejected; the user can use the native controls */
+    });
+  }
 }
 
 function showStep(stepId) {
@@ -363,8 +384,7 @@ function showStep(stepId) {
 
   stopAllVideos();
   if (stepId === "intro") {
-    if (introVideo) lockIntroContinue();
-    tryPlayVideo(introVideo);
+    resetIntroGate();
   } else if (stepId === "confirmation") {
     tryPlayVideo(outroVideo);
   }
@@ -440,10 +460,6 @@ function handleStepButton(event) {
   const step = event.target.dataset.step;
   if (!step) return;
   if (step === "intro") {
-    showStep("avatar");
-    return;
-  }
-  if (step === "avatar") {
     showStep("consent");
     return;
   }
@@ -646,9 +662,8 @@ function init() {
   backButtons.forEach((button) =>
     button.addEventListener("click", () => showStep(button.dataset.back))
   );
-  if (introVideo) {
-    introVideo.addEventListener("playing", unlockIntroContinue);
-    introVideo.addEventListener("error", unlockIntroContinue);
+  if (introStartButton) {
+    introStartButton.addEventListener("click", startIntro);
   }
 
   displayNameInput.addEventListener("input", syncSummary);
