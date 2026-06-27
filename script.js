@@ -366,6 +366,8 @@ function showStep(stepId) {
 
   // On the start screen show nothing but the entry button.
   document.body.classList.toggle("start-active", stepId === "start");
+  // On the intro/video page use the slim brand bar instead of the masthead.
+  document.body.classList.toggle("intro-active", stepId === "intro");
 
   stopAllVideos();
   if (stepId === "confirmation") {

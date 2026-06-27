@@ -492,6 +492,26 @@ input[type="range"]::-moz-range-thumb {
   max-width: none;
 }
 
+/* Intro/video page: slim full-width brand bar instead of the masthead. */
+.intro-active .masthead {
+  display: none;
+}
+
+.intro-brand {
+  margin: 0;
+  padding: 10px 24px;
+  text-align: center;
+  font-family: "Cinzel", serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold-strong);
+  background: rgba(7, 11, 18, 0.7);
+  border-top: 2px solid var(--gold-line);
+  border-bottom: 1px solid var(--line);
+}
+
 .start-panel.active {
   display: flex;
   min-height: 100vh;
