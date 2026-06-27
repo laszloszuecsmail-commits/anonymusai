@@ -348,6 +348,7 @@ function resetIntroGate() {
   // explicitly opts in (browsers block autoplay with sound).
   if (introStart) introStart.hidden = false;
   if (introBody) introBody.hidden = true;
+  document.body.classList.add("intro-locked");
   if (introVideo) {
     introVideo.pause();
     try {
@@ -363,6 +364,7 @@ function startIntro() {
   // Triggered by a user click, so we are allowed to play with sound.
   if (introStart) introStart.hidden = true;
   if (introBody) introBody.hidden = false;
+  document.body.classList.remove("intro-locked");
   if (!introVideo) return;
   introVideo.muted = false;
   introVideo.volume = 1;

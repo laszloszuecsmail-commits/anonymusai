@@ -486,20 +486,21 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .intro-start {
-  position: absolute;
+  position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--line);
-  border-top: 2px solid var(--gold-line);
-  background: rgba(4, 7, 11, 0.82);
-  backdrop-filter: blur(2px);
-  z-index: 2;
+  background: #04070b;
+  z-index: 1000;
 }
 
 .intro-start[hidden] {
   display: none;
+}
+
+.intro-locked {
+  overflow: hidden;
 }
 
 .intro-start .button {
