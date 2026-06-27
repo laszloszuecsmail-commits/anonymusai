@@ -1,4 +1,4 @@
-const steps = ["intro", "consent", "questions", "scenarios", "submit", "confirmation"];
+const steps = ["start", "intro", "consent", "questions", "scenarios", "submit", "confirmation"];
 const scaledQuestions = [
   {
     id: 1,
@@ -264,9 +264,7 @@ const scenarioForm = document.getElementById("scenarioForm");
 const submitButton = document.getElementById("submitButton");
 const introVideo = document.getElementById("introVideo");
 const outroVideo = document.getElementById("outroVideo");
-const introStart = document.getElementById("introStart");
 const introStartButton = document.getElementById("introStartButton");
-const introBody = document.getElementById("introBody");
 
 const RESULTS_CODE = "Leababa2023!";
 const openResultsButton = document.getElementById("openResults");
@@ -343,28 +341,10 @@ function stopAllVideos() {
   });
 }
 
-function resetIntroGate() {
-  // Show the start screen again and keep the video silent until the user
-  // explicitly opts in (browsers block autoplay with sound).
-  if (introStart) introStart.hidden = false;
-  if (introBody) introBody.hidden = true;
-  document.body.classList.add("intro-locked");
-  if (introVideo) {
-    introVideo.pause();
-    try {
-      introVideo.currentTime = 0;
-    } catch (err) {
-      /* currentTime may not be settable until metadata loads; ignore */
-    }
-    introVideo.muted = true;
-  }
-}
-
-function startIntro() {
-  // Triggered by a user click, so we are allowed to play with sound.
-  if (introStart) introStart.hidden = true;
-  if (introBody) introBody.hidden = false;
-  document.body.classList.remove("intro-locked");
+function enterFromStart() {
+  // Triggered by the start-screen button click, so we are allowed to play
+  // with sound. Move to the intro page, then unmute and play.
+  showStep("intro");
   if (!introVideo) return;
   introVideo.muted = false;
   introVideo.volume = 1;
@@ -384,10 +364,11 @@ function showStep(stepId) {
   });
   window.scrollTo({ top: 0, behavior: "smooth" });
 
+  // On the start screen show nothing but the entry button.
+  document.body.classList.toggle("start-active", stepId === "start");
+
   stopAllVideos();
-  if (stepId === "intro") {
-    resetIntroGate();
-  } else if (stepId === "confirmation") {
+  if (stepId === "confirmation") {
     tryPlayVideo(outroVideo);
   }
 }
@@ -485,7 +466,7 @@ function handleStepButton(event) {
     return;
   }
   if (step === "restart") {
-    showStep("intro");
+    showStep("start");
     return;
   }
 }
@@ -665,7 +646,7 @@ function init() {
     button.addEventListener("click", () => showStep(button.dataset.back))
   );
   if (introStartButton) {
-    introStartButton.addEventListener("click", startIntro);
+    introStartButton.addEventListener("click", enterFromStart);
   }
 
   displayNameInput.addEventListener("input", syncSummary);
@@ -695,7 +676,7 @@ function init() {
   if (location.hash === "#kronika") {
     openResults();
   } else {
-    showStep("intro");
+    showStep("start");
   }
 }
 

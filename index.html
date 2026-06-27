@@ -26,39 +26,38 @@
       </header>
 
       <main>
-        <section id="intro" class="panel active">
+        <section id="start" class="panel active start-panel">
+          <div class="panel-content start-screen">
+            <button type="button" id="introStartButton" class="button button-gold">
+              Belépek a krónikába
+            </button>
+          </div>
+        </section>
+
+        <section id="intro" class="panel">
           <div class="panel-content">
             <p class="eyebrow">Anonymus mesél</p>
             <h2>Üdvözöllek a titkos kérdéssorban</h2>
 
             <figure class="intro-video">
-              <div class="intro-video-wrap">
-                <video id="introVideo" controls playsinline preload="auto" muted>
-                  <source src="Avatar_Video_start.mp4" type="video/mp4" />
-                  A böngésződ nem tudja lejátszani ezt a videót.
-                </video>
-                <div class="intro-start" id="introStart">
-                  <button type="button" id="introStartButton" class="button button-gold">
-                    Belépek a krónikába
-                  </button>
-                </div>
-              </div>
+              <video id="introVideo" controls playsinline preload="auto" muted>
+                <source src="Avatar_Video_start.mp4" type="video/mp4" />
+                A böngésződ nem tudja lejátszani ezt a videót.
+              </video>
             </figure>
 
-            <div id="introBody" hidden>
-              <p>
-                Ez nem vizsga, nem ítélet, és nem választási kalauz. A cél egy
-                játékos, intelligens csoportbeszélgetés: a horvátországi táborban
-                közösen fedezzük fel, hogy ki hogyan gondolkodik a szabadságról,
-                felelősségről és a közösségi szerepről.
-              </p>
-              <p class="note">
-                A végső eredmény természetesen titokban marad. A kimenetelt nem
-                láthatod, csak egy megerősítést kapsz.
-              </p>
-              <div class="actions">
-                <button id="introContinue" data-step="intro" class="button">Kezdjük el</button>
-              </div>
+            <p>
+              Ez nem vizsga, nem ítélet, és nem választási kalauz. A cél egy
+              játékos, intelligens csoportbeszélgetés: a horvátországi táborban
+              közösen fedezzük fel, hogy ki hogyan gondolkodik a szabadságról,
+              felelősségről és a közösségi szerepről.
+            </p>
+            <p class="note">
+              A végső eredmény természetesen titokban marad. A kimenetelt nem
+              láthatod, csak egy megerősítést kapsz.
+            </p>
+            <div class="actions">
+              <button id="introContinue" data-step="intro" class="button">Kezdjük el</button>
             </div>
           </div>
         </section>
