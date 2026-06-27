@@ -517,7 +517,7 @@ function saveResult() {
 async function submitResultToBackend(submission) {
   // Google Apps Script web app endpoint (POST -> appends a row to the Sheet).
   const endpoint =
-    "https://script.google.com/macros/s/AKfycbxxMkPvHcEfBAlemfW7LB0gj1khp50k6fenWj-DMnndtud4fCdo4tKbtBfuTLUSHXpH3Q/exec";
+    "https://script.google.com/macros/s/AKfycbxNA_ItzJoUAPMJOg5EvgPIHF-H44hinWsY3XMGgV5Y42TJ7xOZLel-cOD-rQusegKQ9Q/exec";
 
   try {
     const response = await fetch(endpoint, {
